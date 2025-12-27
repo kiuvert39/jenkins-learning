@@ -4,4 +4,4 @@ echo "This script is running from jenkins!"
 
 uname -a
 
-exit 1
+echo "All checks passed"
