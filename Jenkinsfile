@@ -10,7 +10,7 @@ pipeline {
 
         stage("Run script") {
             steps {
-                sh "echo Hello from Jenkins"
+               sh './run.sh'
             }
         }
     }
