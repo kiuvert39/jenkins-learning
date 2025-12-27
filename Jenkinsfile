@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('build') {
             steps {
                 echo 'Building the project...'
@@ -10,8 +11,10 @@ pipeline {
 
         stage('test') {
             steps {
-                echo 'Running tests...'
-                false 
+                sh '''
+                    echo 'Running tests...'
+                    exit 1
+                ''' 
             }
         }
 
