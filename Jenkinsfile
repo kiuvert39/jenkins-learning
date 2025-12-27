@@ -2,39 +2,32 @@ pipeline {
     agent any
 
     stages {
-
-        stage('build') {
+        stage('Build') {
             steps {
-                echo 'Building the project...'
+                echo 'Building...'
             }
         }
 
-        stage('test') {
-            steps {
-                sh '''
-                    echo 'Running tests...'
-                    exit 1
-                ''' 
+        stage('Deploy') {
+            when {
+                branch 'main'
             }
-        }
-
-        stage('deploy') {
             steps {
-                echo 'Deploying the project...'
+                echo 'Deploying to production'
             }
         }
     }
 
-    post {
-        success {
-            echo 'Build succeeded 🎉'
-        }
+    // post {
+    //     success {
+    //         echo 'Build succeeded 🎉'
+    //     }
 
-           failure {
-            echo 'Build failed ❌'
-        }
-        always {
-            echo 'Pipeline finished (cleanup here)'
-        }
-    }
+    //        failure {
+    //         echo 'Build failed ❌'
+    //     }
+    //     always {
+    //         echo 'Pipeline finished (cleanup here)'
+    //     }
+    // }
 }
