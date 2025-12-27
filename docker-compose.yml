@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      - DOCKER_HOST=tcp://socat:2375
+    networks:
+      - jenkins
+
+  socat:
+    image: alpine/socat
+    container_name: socat
+    restart: unless-stopped
+    command: >
+      tcp-listen:2375,fork,reuseaddr
+      unix-connect:/var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jenkins
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins:
+    driver: bridge
