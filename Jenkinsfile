@@ -2,15 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage("checkout") {
+        stage('build') {
             steps {
-                echo 'Checking out code...'
+                echo 'Building the project...'
             }
         }
 
-        stage("Run script") {
+        stage('test') {
             steps {
-               sh './run.sh'
+                echo 'Running tests...'
+                false 
+            }
+        }
+
+        stage('deploy') {
+            steps {
+                echo 'Deploying the project...'
             }
         }
     }
