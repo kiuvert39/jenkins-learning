@@ -2,19 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-            }
-        }
-
-        stage('Deploy') {
-            when {
-                branch 'main'
-            }
-            steps {
-                echo 'Deploying to production'
-            }
+        stage('inspect workspace'){
+            sh '''
+                echo "current directory:"
+                pwd
+                echo "list files:"
+                ls -la
+            
+            '''
         }
     }
 
