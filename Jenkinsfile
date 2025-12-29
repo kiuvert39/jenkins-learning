@@ -5,10 +5,11 @@ pipeline {
         stage('Generate output') {
             steps {
                 sh '''
-                echo "Build completed at $(date)" > build.log
-                echo "Build completed at $(date)"
-                cat build.log
-                '''
+                    pwd
+                    ls -la
+                    echo "Build completed at $(date)" > build.log
+                    ls -la
+                    '''
             }
         }
     }
@@ -16,7 +17,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'build.log'
+            archiveArtifacts artifacts: 'build.log', fingerprint: true
         }
     }
 }
