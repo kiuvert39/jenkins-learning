@@ -2,30 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Inspect workspace') {
+        stage('Generate output') {
             steps {
                 sh '''
-                  echo "Current directory:"
-                  pwd
-
-                  echo "Files here:"
-                  ls -la
+                echo "Build completed at $(date)" > build.log
+                echo "Build completed at $(date)"
+                cat build.log
                 '''
             }
         }
     }
 
 
-    // post {
-    //     success {
-    //         echo 'Build succeeded 🎉'
-    //     }
-
-    //        failure {
-    //         echo 'Build failed ❌'
-    //     }
-    //     always {
-    //         echo 'Pipeline finished (cleanup here)'
-    //     }
-    // }
+    post {
+        always {
+            archiveArtifacts artifacts: 'build.log'
+        }
+    }
 }
