@@ -3,13 +3,15 @@ pipeline {
 
     stages {
         stage('inspect workspace'){
-            sh '''
-                echo "current directory:"
-                pwd
-                echo "list files:"
-                ls -la
-            
-            '''
+            step {
+                sh '''
+                    echo "current directory:"
+                    pwd
+                    echo "list files:"
+                    ls -la
+                
+                '''
+            }
         }
     }
 
