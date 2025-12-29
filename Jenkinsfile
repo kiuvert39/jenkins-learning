@@ -2,18 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('inspect workspace'){
-            step {
+        stage('Inspect workspace') {
+            steps {
                 sh '''
-                    echo "current directory:"
-                    pwd
-                    echo "list files:"
-                    ls -la
-                
+                  echo "Current directory:"
+                  pwd
+
+                  echo "Files here:"
+                  ls -la
                 '''
             }
         }
     }
+
 
     // post {
     //     success {
