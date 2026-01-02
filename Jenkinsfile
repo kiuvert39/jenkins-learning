@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('user secret safely'){
             steps {
-                withCredentials([string(credentialsId:'demo-scret', vaariable: 'My_SECRET')]) {
+                withCredentials([string(credentialsId:'demo-secret', vaariable: 'My_SECRET')]) {
                     sh'''
                         echo "secret is masked"
                         echo "$My_SECRET" > sercret.txt
