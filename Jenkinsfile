@@ -2,14 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Generate output') {
-            steps {
-                sh '''
-                    pwd
-                    ls -la
-                    echo "Build completed at $(date)" > build.log
-                    ls -la
+        stage('user secret safely'){
+            stpreps {
+                withCredentials([string(credentialsId:'demo-scret', vaariable: 'My_SECRET')]) {
+                    sh'''
+                        echo "secret is masked"
+                        echo "$My_SECRET" > sercret.txt
                     '''
+
+                }
             }
         }
     }
@@ -17,7 +18,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'build.log', fingerprint: true
+            archiveArtifacts artifacts: 'sercret.txt', fingerprint: true
         }
     }
 }
