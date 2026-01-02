@@ -3,7 +3,7 @@ pipeline {
 
     stages {
         stage('user secret safely'){
-            stpreps {
+            steps {
                 withCredentials([string(credentialsId:'demo-scret', vaariable: 'My_SECRET')]) {
                     sh'''
                         echo "secret is masked"
